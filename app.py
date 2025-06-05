@@ -1,4 +1,5 @@
 from flask import Flask, render_template_string
+import os
 
 app = Flask(__name__)
 
@@ -44,4 +45,6 @@ def home():
     return render_template_string(html)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Đọc PORT từ Render hoặc fallback về 5000 khi chạy local
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host="0.0.0.0", port=port)
